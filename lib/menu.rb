@@ -27,4 +27,3 @@ end
 
 # menu1 = Menu.new('Sushi', 10)
 # puts menu1.get_total_price(3)
-# puts Menu.discount_day?
