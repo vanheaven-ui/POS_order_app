@@ -1,12 +1,12 @@
 require_relative '../lib/welcome.rb'
 require_relative '../lib/menu.rb'
 
-food1 = Food.new('Sushi', 10)
-food2 = Food.new('Pizza', 8)
-food3 = Food.new('Sharwama', 15)
-drink1 = Drink.new('Tea', 3)
-drink2 = Drink.new('Coke', 2)
-drink3 = Drink.new('Juice', 4)
+food1 = Food.new('Sushi', 10, 700)
+food2 = Food.new('Pizza', 8, 600)
+food3 = Food.new('Sharwama', 15, 800)
+drink1 = Drink.new('Tea', 3, 500)
+drink2 = Drink.new('Coke', 2, 400)
+drink3 = Drink.new('Juice', 4, 300)
 
 menus = [food1, food2, food3, drink1, drink2, drink3]
 

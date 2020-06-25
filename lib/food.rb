@@ -1,3 +1,5 @@
+require_relative './menu.rb'
+
 class Food < Menu
   attr_accessor :calorie
   def initialize(name, price, calorie)
