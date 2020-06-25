@@ -1,3 +1,5 @@
+require_relative './menu.rb'
+
 class Drink < Menu
   attr_accessor :volume
 
@@ -7,6 +9,6 @@ class Drink < Menu
   end
 
   def info
-    "#{@name} $#{price} (#{volume})"
+    "#{@name} $#{price} (#{volume}mL)"
   end
 end
