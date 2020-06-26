@@ -1,4 +1,4 @@
-require_relative '../lib/welcome.rb'
+require_relative '../lib/user.rb'
 require_relative '../lib/drink.rb'
 require_relative '../lib/food.rb'
 require_relative '../lib/menu.rb'
@@ -13,9 +13,9 @@ drink3 = Drink.new('Juice', 4, 300)
 menus = [food1, food2, food3, drink1, drink2, drink3]
 cart = []
 options = (0...menus.size)
-value = ['y', 'n']
+value = %w[y n]
 
-Welcome.welcome
+User.welcome
 puts "Checkout today's menu"
 puts "\n"
 puts "#{Time.now}"
@@ -32,26 +32,41 @@ loop do
     puts 'Enter index matching your menu item:'
     choice = Integer(gets) rescue nil
     puts 'Invalid input' unless options.include? choice
+
     valid = false if options.include? choice
   end
   cart << menus[choice].name
   puts "Your order includes: #{cart}"
+  puts 'Add items? (y/n)'
   confirm = true
   while confirm
-    puts 'Add items? (y/n)'
     response = gets.chomp.downcase
+    puts 'Enter y or n to confirm' unless value.include? response
+
     confirm = false if value.include? response
   end
- break if response == 'n'
+  break if response == 'n'
+end
+puts "Your order includes: #{cart}"
+loop do
+  puts 'Remove item? (y/n)'
+  confirm = true
+  while confirm
+    response = gets.chomp.downcase
+    puts 'Enter y or n to confirm' unless value.include? response
+
+    confirm = false if value.include? response
+  end
+  break unless response == 'y'
+
+  puts 'Enter item to remove'
+  discard = gets.chomp.capitalize
+  cart.slice!(cart.index(discard))
+  puts "Your order includes #{cart}"
 end
 
-puts "Your order includes: #{cart}"
- # if index is valid, push menu item name into array variable cart
-# prompt user to choose another item(add item to cart)
-# valid that response is y or n for user to confirm decision
-# if yes validate input using upper loop while adding select items to cart array
-# loop until user says no
-# display cart as array to user
+
+ 
 # ask user if the would like to dicard items from cart
 # loop until response is no
 # display cart with remaining items to user
@@ -64,6 +79,10 @@ puts '--------Your Receipt---------'
 puts 'Thank you !!!  See you again'
 puts 'How many stars for service?'
 feedback = Integer(gets) rescue nil
-puts "*" * feedback
+stars =  "*" * feedback
+stars = "*" * 5 if feedback > 5
+puts "Thank you for #{stars} rating"
+
+
 
 
