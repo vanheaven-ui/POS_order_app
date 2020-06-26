@@ -5,4 +5,7 @@ module Welcome
     puts "Glad to have you #{gets.chomp.capitalize}"
     puts "\n"
   end
+
+  def validate(input)
+  end
 end

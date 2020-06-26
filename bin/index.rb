@@ -12,6 +12,8 @@ drink3 = Drink.new('Juice', 4, 300)
 
 menus = [food1, food2, food3, drink1, drink2, drink3]
 cart = []
+options = (0...menus.size)
+value = ['y', 'n']
 
 Welcome.welcome
 puts "Checkout today's menu"
@@ -21,13 +23,30 @@ puts "\n"
 sleep(1)
 menus.each.with_index { |menu, i| puts "   #{i} .#{menu.info}" }
 puts "\n"
-puts "-----Place Order------"
-# loop until index input is valid
-# prompt user for index matching item of choice
-# validate index is an integer using Integer() method
-# Handle exception using rescue
-# validate index matches menu using (0...menus.size)
-# if index is valid, push menu item name into array variable cart
+puts '-----Place Order------'
+puts 'Discount of $1 is on wednesdays'
+puts "\n"
+loop do
+  valid = true
+  while valid
+    puts 'Enter index matching your menu item:'
+    choice = Integer(gets) rescue nil
+    puts 'Invalid input' unless options.include? choice
+    valid = false if options.include? choice
+  end
+  cart << menus[choice].name
+  puts "Your order includes: #{cart}"
+  confirm = true
+  while confirm
+    puts 'Add items? (y/n)'
+    response = gets.chomp.downcase
+    confirm = false if value.include? response
+  end
+ break if response == 'n'
+end
+
+puts "Your order includes: #{cart}"
+ # if index is valid, push menu item name into array variable cart
 # prompt user to choose another item(add item to cart)
 # valid that response is y or n for user to confirm decision
 # if yes validate input using upper loop while adding select items to cart array
