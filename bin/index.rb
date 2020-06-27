@@ -77,11 +77,12 @@ puts '--------Your Receipt---------'
 # display total cost of the order summing up the individual costs of each cart item
 
 puts 'Thank you !!!  See you again'
-puts 'How many stars for service?'
+puts 'Enter number of stars to rate service'
 feedback = Integer(gets) rescue nil
 stars =  "*" * feedback
 stars = "*" * 5 if feedback > 5
-puts "Thank you for #{stars} rating"
+puts "Thank you for #{stars} rating" if feedback >= 4
+puts "Thank you!!! for #{stars}. We shall do better next time" if feedback < 4
 
 
 
