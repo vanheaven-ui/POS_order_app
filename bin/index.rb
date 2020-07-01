@@ -13,7 +13,6 @@ drink3 = Drink.new('Juice', 4, 300)
 menus = [food1, food2, food3, drink1, drink2, drink3]
 cart = []
 options = (0...menus.size)
-value = %w[y n]
 
 User.welcome
 puts "Checkout today's menu"
@@ -38,30 +37,18 @@ loop do
   cart << menus[choice].name
   puts "Your order includes: #{cart}"
   puts 'Add items? (y/n)'
-  confirm = true
-  while confirm
-    response = gets.chomp.downcase
-    puts 'Enter y or n to confirm' unless value.include? response
-
-    confirm = false if value.include? response
-  end
-  break if response == 'n'
+  User.confirm
+  break if $response == 'n'
 end
 puts "Your order includes: #{cart}"
 loop do
   puts 'Remove item? (y/n)'
-  confirm = true
-  while confirm
-    response = gets.chomp.downcase
-    puts 'Enter y or n to confirm' unless value.include? response
-
-    confirm = false if value.include? response
-  end
-  break unless response == 'y'
+  User.confirm
+  break unless $response == 'y'
 
   puts 'Enter item to remove'
-  discard = gets.chomp.capitalize
-  cart.slice!(cart.index(discard))
+  User.remove(cart)
+  cart.slice!(cart.index($discard))
   puts "Your order includes #{cart}"
 end
 
