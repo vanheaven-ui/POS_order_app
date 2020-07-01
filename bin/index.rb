@@ -23,7 +23,10 @@ sleep(1)
 menus.each.with_index { |menu, i| puts "   #{i} .#{menu.info}" }
 puts "\n"
 puts '-----Place Order------'
-puts 'Discount of $1 is on wednesdays'
+puts 'Discount of $1 is on wednesdays' unless Menu.discount_day?
+
+puts 'Today is $1 discount day!!!!!!' if Menu.discount_day?
+
 puts "\n"
 loop do
   valid = true
@@ -51,9 +54,31 @@ loop do
   cart.slice!(cart.index($discard))
   puts "Your order includes #{cart}"
 end
+item1 = 0
+item2 = 0
+item3 = 0
+item4 = 0
+item5 = 0 
+item6 = 0
+cart.each do |item|
+  item1 += 1 if item == 'Sushi'
+  item2 += 1 if item == 'Pizza'
+  item3 += 1 if item == 'Sharwama'
+  item4 += 1 if item == 'Tea'
+  item5 += 1 if item == 'Coke'
+  item6 += 1 if item == 'Juice'
+end
 
+counts = [item1, item2, item3, item4, item5]
+p counts
 
- 
+menus.each.with_index do |menu, i|
+  next unless counts[i].positive?
+
+  puts "You ordered #{counts[i]} #{menu.name}"
+  puts "The cost is $#{menu.get_total_price(counts[i])}"
+end
+
 # ask user if the would like to dicard items from cart
 # loop until response is no
 # display cart with remaining items to user
