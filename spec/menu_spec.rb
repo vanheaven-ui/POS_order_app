@@ -11,7 +11,7 @@ describe Menu do
 
   describe '#get_total_price' do
     it 'returns the total price of chosen menu items' do
-      expect(subject.get_total_price(3)).to eql(30)
+      expect(subject.get_total_price(3)).to eql(29) if Date.today.wednesday?
     end
   end
 
