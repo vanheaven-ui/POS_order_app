@@ -7,7 +7,7 @@ module User
     puts "\n"
   end
 
-  def self.validate
+  def self.validate(name)
     confirm = true
     while confirm
       name = gets.chomp.capitalize
