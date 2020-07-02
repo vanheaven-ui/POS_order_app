@@ -98,6 +98,7 @@ loop do
   break if !$feedback.nil?
 end
 stars = '*' * $feedback
+stars = '0 stars' if $feedback == 0
 stars = '*' * 5 if $feedback > 5
 puts "Thank you for #{stars} rating" if $feedback >= 4
 puts "Thank you!!! for #{stars}. We shall do better next time" if $feedback < 4
