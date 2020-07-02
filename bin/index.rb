@@ -1,8 +1,11 @@
+# bin/index.rb
+
 require_relative '../lib/user.rb'
 require_relative '../lib/drink.rb'
 require_relative '../lib/food.rb'
 require_relative '../lib/menu.rb'
 
+# To refactor this
 food1 = Food.new('Sushi', 10, 700)
 food2 = Food.new('Pizza', 8, 600)
 food3 = Food.new('Sharwama', 15, 800)
@@ -54,6 +57,11 @@ loop do
   cart.slice!(cart.index($discard))
   puts "Your order includes #{cart}"
 end
+puts '--------Your Receipt---------'
+puts "\n"
+puts "   #{Time.now}"
+puts "\n"
+# To refactor this
 item1 = 0
 item2 = 0
 item3 = 0
@@ -68,34 +76,28 @@ cart.each do |item|
   item5 += 1 if item == 'Coke'
   item6 += 1 if item == 'Juice'
 end
-
 counts = [item1, item2, item3, item4, item5]
-p counts
-
+total_price = 0
+verify = %[nil 0]
 menus.each.with_index do |menu, i|
-  next unless counts[i].positive?
+  next if verify.include? counts[i].to_s
 
-  puts "You ordered #{counts[i]} #{menu.name}"
-  puts "The cost is $#{menu.get_total_price(counts[i])}"
+  puts "   You ordered #{counts[i]} #{menu.name}"
+  puts "   The cost is $#{menu.get_total_price(counts[i])}"
+  total_price += menu.get_total_price(counts[i])
 end
-
-# ask user if the would like to dicard items from cart
-# loop until response is no
-# display cart with remaining items to user
-# enumerate the cart array and keep count of same items in cart array
-# compute the total cost of each item
-puts '--------Your Receipt---------'
-# display the count of each item and the total cost of the count
-# display total cost of the order summing up the individual costs of each cart item
-
+puts "\n"
+puts "Total bill is $#{total_price}."
+puts "\n"
 puts 'Thank you !!!  See you again'
 puts 'Enter number of stars to rate service'
-feedback = Integer(gets) rescue nil
-stars =  "*" * feedback
-stars = "*" * 5 if feedback > 5
-puts "Thank you for #{stars} rating" if feedback >= 4
-puts "Thank you!!! for #{stars}. We shall do better next time" if feedback < 4
+loop do
+  $feedback = Integer(gets) rescue nil
+  puts 'Kindly provide number of stars to rate service' if $feedback.nil?
 
-
-
-
+  break if !$feedback.nil?
+end
+stars = '*' * $feedback
+stars = '*' * 5 if $feedback > 5
+puts "Thank you for #{stars} rating" if $feedback >= 4
+puts "Thank you!!! for #{stars}. We shall do better next time" if $feedback < 4
